@@ -1,0 +1,188 @@
+/* Sidebar */
+.sidebar {
+}
+.sidebar__container {
+}
+.sidebar-profile {
+}
+.sidebar-profile__button {
+}
+.sidebar-profile__button-content {
+}
+.profile-avatar {
+}
+.sidebar-profile__button-title {
+}
+.sidebar-profile__button-game-running-title {
+}
+.sidebar-profile__friends-button {
+}
+.sidebar__content {
+}
+.sidebar__section {
+}
+.sidebar__menu {
+}
+.sidebar__menu-item {
+}
+.sidebar__menu-item-button {
+}
+.sidebar__menu-item--active {
+}
+.sidebar__handle {
+}
+
+/* Header */
+.header {
+}
+.header--is-windows {
+}
+.header__section {
+}
+.header__section--left {
+}
+.header__back-button {
+}
+.header__back-button--enabled {
+}
+.header__title {
+}
+.header__title--has-back-button {
+}
+.header__search {
+}
+.header__action-button {
+}
+.header__search-input {
+}
+
+/* Container e Seções */
+.container {
+}
+.container__content {
+}
+.settings__container {
+}
+.settings__categories {
+}
+.settings__appearance {
+}
+.settings-appearance__actions {
+}
+.settings-appearance__actions-left {
+}
+.settings-appearance__actions-right {
+}
+.settings-appearance__button {
+}
+.settings-appearance__themes {
+}
+
+/* Theme Cards */
+.theme-card {
+}
+.theme-card__header {
+}
+.theme-card__header__title {
+}
+.theme-card__author {
+}
+.theme-card__author__name {
+}
+.theme-card__actions {
+}
+.theme-card__actions__left {
+}
+.theme-card__actions__right {
+}
+
+/* Generic Buttons */
+.button {
+}
+.button--outline {
+}
+.button--primary {
+}
+.button--danger {
+}
+
+/* Bottom Panel */
+.bottom-panel {
+}
+.bottom-panel__downloads-button {
+}
+.bottom-panel__version-button {
+}
+
+/* Popups and Widgets */
+.fb-changelog-popup-wrapper {
+}
+.fb-changelog-popup-iframe {
+}
+.fb-changelog-popup-overlay {
+}
+.featurebase-widget-overlay {
+}
+.featurebase-widget-iframe {
+}
+.featurebase-widget-iframe-right {
+}
+.fb-widget-fullscreen-x {
+}
+.fb-button-x-fade-in {
+}
+
+/* Icons (Octicons) */
+.octicon {
+}
+.octicon-person {
+}
+.octicon-people {
+}
+.octicon-home {
+}
+.octicon-apps {
+}
+.octicon-download {
+}
+.octicon-gear {
+}
+.octicon-arrow-left {
+}
+.octicon-search {
+}
+.octicon-globe {
+}
+.octicon-trash {
+}
+.octicon-plus {
+}
+.octicon-pencil {
+}
+
+/* Text Field */
+.text-field-container {
+}
+.text-field-container__text-field-wrapper {
+}
+.text-field-container__text-field {
+}
+.text-field-container__text-field--dark {
+}
+.text-field-container__text-field-input {
+}
+
+/* Footer */
+.bottom-panel {
+}
+.bottom-panel__downloads-button {
+}
+.bottom-panel__version-button {
+}
+
+/* Alerts & Misc */
+.fb-alert {
+}
+.fb-modal {
+}
+/* …adicione aqui todas as outras classes que constam no seu css.txt… */
