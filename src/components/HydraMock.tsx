@@ -5,14 +5,47 @@ export interface HydraMockProps {
     customCss: string;
 }
 
+/**  
+ * Prefixa cada seletor do bloco CSS com "#hydra-mock ".
+ * Ex.: ".sidebar {…}" → "#hydra-mock .sidebar {…}"
+ */
+function scopeCss(css: string): string {
+    return css.replace(
+        /([^{}]+)\{([^}]*)\}/g,
+        (_match: string, selectors: string, body: string): string => {
+            const scoped = selectors
+                .split(",")
+                .map((raw) => {
+                    const sel = raw.trim();
+                    // Se o usuário escreveu #root ou body/html, redireciona pro container
+                    if (sel === "body" || sel === "html" || sel === "#root") {
+                        return "#hydra-mock";
+                    }
+                    // Se já está prefixado, mantém
+                    if (sel.startsWith("#hydra-mock")) {
+                        return sel;
+                    }
+                    // Caso normal, prefixa
+                    return `#hydra-mock ${sel}`;
+                })
+                .join(", ");
+
+            return `${scoped} {${body}}`;
+        }
+    );
+}
+
+
+
 export const HydraMock = forwardRef<HTMLDivElement, HydraMockProps>(
     ({ customCss }, ref) => (
         <div
             ref={ref}
+            id="hydra-mock"
             className="hydra-mock flex h-full w-full bg-gray-900 text-gray-200 font-sans"
         >
             {/* Injeta o CSS do tema */}
-            <style>{customCss}</style>
+            <style>{scopeCss(customCss)}</style>
 
             {/* Sidebar */}
             <aside className="sidebar sidebar__container w-64 bg-gray-800 p-4 flex flex-col overflow-y-auto">
