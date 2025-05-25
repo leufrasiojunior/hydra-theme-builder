@@ -1,7 +1,9 @@
 // src/components/ThemeEditor.tsx
 import React, { useState, useRef } from "react";
-import { HydraMock } from "./HydraMock";
+import Editor from "@monaco-editor/react";
 import html2canvas from "html2canvas";
+import { HydraMock } from "./HydraMock";
+import type { OnMount } from "@monaco-editor/react";
 
 export function ThemeEditor() {
     // Estados para edição de CSS e inputs
@@ -15,6 +17,47 @@ export function ThemeEditor() {
 
     // ref para capturar screenshot do mock
     const mockRef = useRef<HTMLDivElement>(null);
+
+    const handleEditorDidMount: OnMount = async (editor, monacoInstance) => {
+        try {
+            // 1) Busca o CSS global do mock
+            const res = await fetch("/styles/HydraMock.css");
+            const text = await res.text();
+
+            // 2) Extrai todas as classes via regex
+            const clsSet = new Set<string>();
+            const regex = /\.([a-zA-Z0-9_-]+)/g;
+            let m;
+            while ((m = regex.exec(text))) {
+                clsSet.add(m[1]);
+            }
+            const classes = Array.from(clsSet);
+
+            // 3) Registra o provedor de autocomplete para CSS
+            monacoInstance.languages.registerCompletionItemProvider("css", {
+                provideCompletionItems: (model, position) => {
+                    const wordInfo = model.getWordUntilPosition(position);
+                    const range = {
+                        startLineNumber: position.lineNumber,
+                        startColumn: wordInfo.startColumn,
+                        endLineNumber: position.lineNumber,
+                        endColumn: wordInfo.endColumn,
+                    };
+
+                    const suggestions = classes.map((cls) => ({
+                        label: `.${cls}`,
+                        kind: monacoInstance.languages.CompletionItemKind.Class,
+                        insertText: `.${cls}`,
+                        range,
+                    }));
+
+                    return { suggestions };
+                },
+            });
+        } catch (e) {
+            console.error("Erro carregando classes para autocomplete:", e);
+        }
+    };
 
     // Função para capturar screenshot e retornar Base64
     const takeScreenshot = async (): Promise<string> => {
@@ -90,13 +133,29 @@ export function ThemeEditor() {
 
                 <label className="block">
                     <span className="text-sm">CSS Customizado</span>
-                    <textarea
-                        rows={12}
-                        value={customCss}
-                        onChange={(e) => setCustomCss(e.target.value)}
-                        className="w-full mt-1 p-2 bg-gray-800 text-gray-200 font-mono text-sm rounded"
-                        placeholder="Escreva seu CSS aqui…"
-                    />
+                    <div className="mt-1 h-48 border border-gray-700">
+                        <Editor
+                            onMount={handleEditorDidMount}
+                            height="100%"
+                            defaultLanguage="css"
+                            value={customCss}
+                            theme="vs-dark"
+                            options={{
+                                automaticLayout: true,
+                                minimap: { enabled: false },
+                                fontFamily: "monospace",
+                                fontSize: 14,
+                                tabSize: 2,
+                                wordWrap: "on",
+                                formatOnType: true,
+                                formatOnPaste: true,
+                                suggestOnTriggerCharacters: true,
+                                quickSuggestions: true,
+                                autoClosingBrackets: "always",
+                            }}
+                            onChange={(value) => setCustomCss(value || "")}
+                        />
+                    </div>
                 </label>
 
                 <div className="flex space-x-2">

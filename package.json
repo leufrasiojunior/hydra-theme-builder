@@ -11,8 +11,10 @@
   "dependencies": {
     "@headlessui/react": "^2.2.4",
     "@heroicons/react": "^2.2.0",
+    "@monaco-editor/react": "^4.7.0",
     "@octokit/rest": "^21.1.1",
     "html2canvas": "^1.4.1",
+    "monaco-editor": "^0.52.2",
     "next": "15.1.8",
     "next-auth": "^4.24.11",
     "react": "^19.0.0",
