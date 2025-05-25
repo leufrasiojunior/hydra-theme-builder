@@ -49,7 +49,6 @@ export function ThemeEditor() {
             {/* Painel de edição */}
             <div className="w-1/3 p-4 border-r border-gray-700 space-y-4 overflow-auto">
                 <h2 className="text-lg font-semibold">Editor de Tema</h2>
-
                 <label className="block">
                     <span className="text-sm">Nome do Tema</span>
                     <input
