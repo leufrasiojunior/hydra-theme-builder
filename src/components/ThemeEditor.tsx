@@ -5,21 +5,23 @@ import html2canvas from "html2canvas";
 
 export function ThemeEditor() {
     // Estados para edição de CSS e inputs
-    const [customCss, setCustomCss] = useState<string>(".sidebar { background-color: #2c3e50; }\n");
+    const [customCss, setCustomCss] = useState<string>(
+        ".sidebar { background-color: #2c3e50; }\n"
+    );
     const [themeName, setThemeName] = useState<string>("");
     const [themeCode, setThemeCode] = useState<string>("");
-
-    // ref para capturar screenshot
-    const mockRef = useRef<HTMLDivElement>(null);
-
-    // Abre preview em fullscreen
+    const [loading, setLoading] = useState<boolean>(false);
     const [previewOpen, setPreviewOpen] = useState<boolean>(false);
+
+    // ref para capturar screenshot do mock
+    const mockRef = useRef<HTMLDivElement>(null);
 
     // Função para capturar screenshot e retornar Base64
     const takeScreenshot = async (): Promise<string> => {
         if (!mockRef.current) throw new Error("Mock indisponível");
         const canvas = await html2canvas(mockRef.current);
-        return canvas.toDataURL("image/png").split(",")[1];
+        const dataUrl = canvas.toDataURL("image/png");
+        return dataUrl.split(",")[1]; // Retorna apenas o Base64
     };
 
     // Handler de criação de PR
@@ -28,19 +30,33 @@ export function ThemeEditor() {
             alert("Preencha nome e código do tema");
             return;
         }
+
+        setLoading(true);
         try {
+            // 1) captura screenshot
             const screenshot = await takeScreenshot();
+
+            // 2) envia todos os dados, incluindo screenshot em base64
             const res = await fetch("/api/github/create-theme-pr", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 credentials: "include",
-                body: JSON.stringify({ themeName, themeCode, themeCss: customCss, screenshot }),
+                body: JSON.stringify({
+                    themeName,
+                    themeCode,
+                    themeCss: customCss,
+                    screenshot, // Base64 do PNG sem prefixo
+                }),
             });
+
             const json = await res.json();
             if (!res.ok) throw new Error(json.error || "Erro ao criar PR");
+
             window.open(json.prUrl, "_blank");
         } catch (err: any) {
             alert(err.message);
+        } finally {
+            setLoading(false);
         }
     };
 
@@ -49,6 +65,7 @@ export function ThemeEditor() {
             {/* Painel de edição */}
             <div className="w-1/3 p-4 border-r border-gray-700 space-y-4 overflow-auto">
                 <h2 className="text-lg font-semibold">Editor de Tema</h2>
+
                 <label className="block">
                     <span className="text-sm">Nome do Tema</span>
                     <input
@@ -78,6 +95,7 @@ export function ThemeEditor() {
                         value={customCss}
                         onChange={(e) => setCustomCss(e.target.value)}
                         className="w-full mt-1 p-2 bg-gray-800 text-gray-200 font-mono text-sm rounded"
+                        placeholder="Escreva seu CSS aqui…"
                     />
                 </label>
 
@@ -90,9 +108,10 @@ export function ThemeEditor() {
                     </button>
                     <button
                         onClick={handleCreatePr}
-                        className="flex-1 px-4 py-2 bg-blue-600 rounded text-center"
+                        disabled={loading}
+                        className="flex-1 px-4 py-2 bg-blue-600 rounded text-center disabled:opacity-50"
                     >
-                        Create PR
+                        {loading ? "Enviando PR…" : "Create PR"}
                     </button>
                 </div>
             </div>
