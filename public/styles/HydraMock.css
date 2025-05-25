@@ -1,188 +1,264 @@
-/* Sidebar */
+/* 1. Barra de título (Title Bar) */
+.title-bar {
+  --placeholder: "";
+}
+
+/* 2. Sidebar (Barra lateral) */
 .sidebar {
+  --placeholder: "";
 }
 .sidebar__container {
-}
-.sidebar-profile {
-}
-.sidebar-profile__button {
-}
-.sidebar-profile__button-content {
-}
-.profile-avatar {
-}
-.sidebar-profile__button-title {
-}
-.sidebar-profile__button-game-running-title {
-}
-.sidebar-profile__friends-button {
+  --placeholder: "";
 }
 .sidebar__content {
+  --placeholder: "";
 }
 .sidebar__section {
+  --placeholder: "";
 }
 .sidebar__menu {
+  --placeholder: "";
 }
 .sidebar__menu-item {
+  --placeholder: "";
 }
 .sidebar__menu-item-button {
+  --placeholder: "";
 }
 .sidebar__menu-item--active {
+  --placeholder: "";
 }
 .sidebar__handle {
+  --placeholder: "";
 }
 
-/* Header */
-.header {
+/* 3. Perfil do usuário na sidebar */
+.sidebar-profile {
+  --placeholder: "";
 }
-.header--is-windows {
+.sidebar-profile__button {
+  --placeholder: "";
 }
-.header__section {
+.sidebar-profile__button-content {
+  --placeholder: "";
 }
-.header__section--left {
+.profile-avatar {
+  --placeholder: "";
 }
-.header__back-button {
+.sidebar-profile__button-information {
+  --placeholder: "";
 }
-.header__back-button--enabled {
+.sidebar-profile__button-title {
+  --placeholder: "";
 }
-.header__title {
+.sidebar-profile__button-game-running-title {
+  --placeholder: "";
 }
-.header__title--has-back-button {
+.sidebar-profile__game-running-icon {
+  --placeholder: "";
 }
-.header__search {
-}
-.header__action-button {
-}
-.header__search-input {
-}
-
-/* Container e Seções */
-.container {
-}
-.container__content {
-}
-.settings__container {
-}
-.settings__categories {
-}
-.settings__appearance {
-}
-.settings-appearance__actions {
-}
-.settings-appearance__actions-left {
-}
-.settings-appearance__actions-right {
-}
-.settings-appearance__button {
-}
-.settings-appearance__themes {
+.sidebar-profile__friends-button {
+  --placeholder: "";
 }
 
-/* Theme Cards */
-.theme-card {
-}
-.theme-card__header {
-}
-.theme-card__header__title {
-}
-.theme-card__author {
-}
-.theme-card__author__name {
-}
-.theme-card__actions {
-}
-.theme-card__actions__left {
-}
-.theme-card__actions__right {
-}
-
-/* Generic Buttons */
-.button {
-}
-.button--outline {
-}
-.button--primary {
-}
-.button--danger {
-}
-
-/* Bottom Panel */
-.bottom-panel {
-}
-.bottom-panel__downloads-button {
-}
-.bottom-panel__version-button {
-}
-
-/* Popups and Widgets */
-.fb-changelog-popup-wrapper {
-}
-.fb-changelog-popup-iframe {
-}
-.fb-changelog-popup-overlay {
-}
-.featurebase-widget-overlay {
-}
-.featurebase-widget-iframe {
-}
-.featurebase-widget-iframe-right {
-}
-.fb-widget-fullscreen-x {
-}
-.fb-button-x-fade-in {
-}
-
-/* Icons (Octicons) */
-.octicon {
-}
-.octicon-person {
-}
-.octicon-people {
-}
-.octicon-home {
-}
-.octicon-apps {
-}
-.octicon-download {
-}
-.octicon-gear {
-}
-.octicon-arrow-left {
-}
-.octicon-search {
-}
-.octicon-globe {
-}
-.octicon-trash {
-}
-.octicon-plus {
-}
-.octicon-pencil {
-}
-
-/* Text Field */
+/* 4. Campo de busca na sidebar */
 .text-field-container {
+  --placeholder: "";
 }
 .text-field-container__text-field-wrapper {
+  --placeholder: "";
 }
 .text-field-container__text-field {
+  --placeholder: "";
 }
 .text-field-container__text-field--dark {
+  --placeholder: "";
 }
 .text-field-container__text-field-input {
+  --placeholder: "";
 }
 
-/* Footer */
+/* 5. Container principal e header */
+.container {
+  --placeholder: "";
+}
+.header {
+  --placeholder: "";
+}
+.header--is-windows {
+  --placeholder: "";
+}
+.header__section {
+  --placeholder: "";
+}
+.header__section--left {
+  --placeholder: "";
+}
+.header__back-button {
+  --placeholder: "";
+}
+.header__back-button--enabled {
+  --placeholder: "";
+}
+.header__title {
+  --placeholder: "";
+}
+.header__title--has-back-button {
+  --placeholder: "";
+}
+.header__search {
+  --placeholder: "";
+}
+.header__action-button {
+  --placeholder: "";
+}
+.header__search-input {
+  --placeholder: "";
+}
+
+/* 6. Banner de destaque e filtros */
+.container__content {
+  --placeholder: "";
+}
+.settings__container {
+  --placeholder: "";
+}
+.settings__categories {
+  --placeholder: "";
+}
+.settings__appearance {
+  --placeholder: "";
+}
+.settings-appearance__actions {
+  --placeholder: "";
+}
+.settings-appearance__actions-left {
+  --placeholder: "";
+}
+.settings-appearance__actions-right {
+  --placeholder: "";
+}
+.settings-appearance__button {
+  --placeholder: "";
+}
+.settings-appearance__themes {
+  --placeholder: "";
+}
+
+/* 7. Cards de tema */
+.theme-card {
+  --placeholder: "";
+}
+.theme-card__header {
+  --placeholder: "";
+}
+.theme-card__header__title {
+  --placeholder: "";
+}
+.theme-card__author {
+  --placeholder: "";
+}
+.theme-card__author__name {
+  --placeholder: "";
+}
+.theme-card__actions {
+  --placeholder: "";
+}
+.theme-card__actions__left {
+  --placeholder: "";
+}
+.theme-card__actions__right {
+  --placeholder: "";
+}
+
+/* 8. Botões genéricos */
+.button {
+  --placeholder: "";
+}
+.button--outline {
+  --placeholder: "";
+}
+.button--primary {
+  --placeholder: "";
+}
+.button--danger {
+  --placeholder: "";
+}
+
+/* 9. Bottom Panel / Rodapé */
 .bottom-panel {
+  --placeholder: "";
 }
 .bottom-panel__downloads-button {
+  --placeholder: "";
 }
 .bottom-panel__version-button {
+  --placeholder: "";
 }
 
-/* Alerts & Misc */
-.fb-alert {
+/* 10. Popups e widgets */
+.fb-changelog-popup-wrapper {
+  --placeholder: "";
 }
-.fb-modal {
+.fb-changelog-popup-iframe {
+  --placeholder: "";
 }
-/* …adicione aqui todas as outras classes que constam no seu css.txt… */
+.fb-changelog-popup-overlay {
+  --placeholder: "";
+}
+.featurebase-widget-overlay {
+  --placeholder: "";
+}
+.featurebase-widget-iframe {
+  --placeholder: "";
+}
+.featurebase-widget-iframe-right {
+  --placeholder: "";
+}
+.fb-widget-fullscreen-x {
+  --placeholder: "";
+}
+.fb-button-x-fade-in {
+  --placeholder: "";
+}
+
+/* 11. Ícones (Octicons) */
+.octicon {
+  --placeholder: "";
+}
+.octicon-person {
+  --placeholder: "";
+}
+.octicon-people {
+  --placeholder: "";
+}
+.octicon-home {
+  --placeholder: "";
+}
+.octicon-apps {
+  --placeholder: "";
+}
+.octicon-download {
+  --placeholder: "";
+}
+.octicon-gear {
+  --placeholder: "";
+}
+.octicon-arrow-left {
+  --placeholder: "";
+}
+.octicon-search {
+  --placeholder: "";
+}
+.octicon-globe {
+  --placeholder: "";
+}
+.octicon-trash {
+  --placeholder: "";
+}
+.octicon-plus {
+  --placeholder: "";
+}
+.octicon-pencil {
+  --placeholder: "";
+}

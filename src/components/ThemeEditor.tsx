@@ -4,6 +4,7 @@ import Editor from "@monaco-editor/react";
 import html2canvas from "html2canvas";
 import { HydraMock } from "./HydraMock";
 import type { OnMount } from "@monaco-editor/react";
+import classDescriptions from "@/data/classDescriptions";
 
 export function ThemeEditor() {
     // Estados para edição de CSS e inputs
@@ -19,44 +20,44 @@ export function ThemeEditor() {
     const mockRef = useRef<HTMLDivElement>(null);
 
     const handleEditorDidMount: OnMount = async (editor, monacoInstance) => {
-        try {
-            // 1) Busca o CSS global do mock
-            const res = await fetch("/styles/HydraMock.css");
-            const text = await res.text();
+        // 1) Carrega o CSS do mock
+        const res = await fetch("/styles/HydraMock.css");
+        const text = await res.text();
 
-            // 2) Extrai todas as classes via regex
-            const clsSet = new Set<string>();
-            const regex = /\.([a-zA-Z0-9_-]+)/g;
-            let m;
-            while ((m = regex.exec(text))) {
-                clsSet.add(m[1]);
-            }
-            const classes = Array.from(clsSet);
+        // 2) Extrai as classes
+        const clsSet = new Set<string>();
+        const regex = /\.([a-zA-Z0-9_-]+)/g;
+        let m;
+        while ((m = regex.exec(text))) clsSet.add(m[1]);
+        const classes = Array.from(clsSet);
 
-            // 3) Registra o provedor de autocomplete para CSS
-            monacoInstance.languages.registerCompletionItemProvider("css", {
-                provideCompletionItems: (model, position) => {
-                    const wordInfo = model.getWordUntilPosition(position);
-                    const range = {
-                        startLineNumber: position.lineNumber,
-                        startColumn: wordInfo.startColumn,
-                        endLineNumber: position.lineNumber,
-                        endColumn: wordInfo.endColumn,
-                    };
+        // 4) Registra autocomplete para CSS, disparado ao digitar “.”
+        monacoInstance.languages.registerCompletionItemProvider("css", {
+            triggerCharacters: ["."],
+            provideCompletionItems: (model, position) => {
+                const wordInfo = model.getWordUntilPosition(position);
+                const range = {
+                    startLineNumber: position.lineNumber,
+                    startColumn: wordInfo.startColumn,
+                    endLineNumber: position.lineNumber,
+                    endColumn: wordInfo.endColumn,
+                };
 
-                    const suggestions = classes.map((cls) => ({
-                        label: `.${cls}`,
-                        kind: monacoInstance.languages.CompletionItemKind.Class,
-                        insertText: `.${cls}`,
-                        range,
-                    }));
+                const suggestions = classes.map((cls) => ({
+                    // 👇 aqui trocamos a string por um objeto
+                    label: {
+                        label: `.${cls}`,                           // o texto da sugestão
+                        description: classDescriptions[cls] || "", // a descrição inline
+                    },
+                    kind: monacoInstance.languages.CompletionItemKind.Class,
+                    insertText: `.${cls}`,                       // o que vai ser inserido
+                    range,
+                }));
 
-                    return { suggestions };
-                },
-            });
-        } catch (e) {
-            console.error("Erro carregando classes para autocomplete:", e);
-        }
+
+                return { suggestions };
+            },
+        });
     };
 
     // Função para capturar screenshot e retornar Base64
