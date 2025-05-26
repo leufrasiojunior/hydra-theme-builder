@@ -9,7 +9,7 @@ import classDescriptions from "@/data/classDescriptions";
 export function ThemeEditor() {
     // Estados para edição de CSS e inputs
     const [customCss, setCustomCss] = useState<string>(
-        ".sidebar { background-color: #2c3e50; }\n"
+        "//.sidebar { background-color: #2c3e50; }\n"
     );
     const [themeName, setThemeName] = useState<string>("");
     const [themeCode, setThemeCode] = useState<string>("");

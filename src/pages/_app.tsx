@@ -12,7 +12,7 @@ export default function App({ Component, pageProps }: AppProps) {
       <Navbar />
 
       {/* 2) Conteúdo principal com padding-top para não ficar sob a Navbar */}
-      <main className="pt-10 h-full">
+      <main className="pt-16 h-full">
         <Component {...pageProps} />
       </main>
     </SessionProvider>
