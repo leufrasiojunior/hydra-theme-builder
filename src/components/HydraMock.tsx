@@ -1,4 +1,5 @@
 // src/components/HydraMock.tsx
+import { ArrowDownTrayIcon, Cog6ToothIcon, HomeIcon, Squares2X2Icon } from "@heroicons/react/24/outline";
 import React, { forwardRef } from "react";
 
 export interface HydraMockProps {
@@ -73,25 +74,25 @@ export const HydraMock = forwardRef<HTMLDivElement, HydraMockProps>(
                         <ul className="sidebar__menu space-y-1">
                             <li className="sidebar__menu-item">
                                 <button className="sidebar__menu-item-button flex items-center space-x-2 w-full px-3 py-2 rounded bg-gray-700">
-                                    <span className="octicon octicon-home sidebar__handle" />
+                                    <HomeIcon className="h-5 w-5 text-gray-200" aria-hidden="true" />
                                     <span>Início</span>
                                 </button>
                             </li>
                             <li className="sidebar__menu-item">
                                 <button className="sidebar__menu-item-button flex items-center space-x-2 w-full px-3 py-2 rounded hover:bg-gray-700">
-                                    <span className="octicon octicon-apps" />
+                                    <Squares2X2Icon className="h-5 w-5 text-gray-200" aria-hidden="true" />
                                     <span>Catálogo</span>
                                 </button>
                             </li>
                             <li className="sidebar__menu-item">
                                 <button className="sidebar__menu-item-button flex items-center space-x-2 w-full px-3 py-2 rounded hover:bg-gray-700">
-                                    <span className="octicon octicon-download" />
+                                    <ArrowDownTrayIcon className="h-5 w-5 text-gray-200" aria-hidden="true" />
                                     <span>Downloads</span>
                                 </button>
                             </li>
                             <li className="sidebar__menu-item">
                                 <button className="sidebar__menu-item-button flex items-center space-x-2 w-full px-3 py-2 rounded hover:bg-gray-700 sidebar__menu-item--active">
-                                    <span className="octicon octicon-gear" />
+                                    <Cog6ToothIcon className="h-5 w-5 text-gray-200" aria-hidden="true" />
                                     <span>Ajustes</span>
                                 </button>
                             </li>
