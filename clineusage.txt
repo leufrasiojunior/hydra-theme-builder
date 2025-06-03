@@ -1,0 +1,6 @@
+https://docs.cline.bot/prompting/cline-memory-bank
+
+“follow your custom instructions” - This tells Cline to read the Memory Bank files and continue where you left off (use this at the start of tasks)
+“initialize memory bank” - Use when starting a new project
+“update memory bank” - Triggers a full documentation review and update during a task
+Toggle Plan/Act modes based on your current needs
