@@ -244,7 +244,7 @@ export const HydraMock = forwardRef<HTMLDivElement, HydraMockProps>(
                   placeholder="Buscar jogos"
                   className="header__search-input bg-gray-700 text-gray-300 placeholder-gray-500 px-3 py-1 rounded focus:outline-none"
                 />
-                <button className="header__action-button absolute right-1 top-1 octicon octicon-search" />
+                <button className="header__action-button absolute right-1 top-1/2 -translate-y-1/2 octicon octicon-search" />
               </div>
             </header>
 
