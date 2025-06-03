@@ -231,21 +231,34 @@ export const HydraMock = forwardRef<HTMLDivElement, HydraMockProps>(
           {/* Main Content */}
           <div className="flex-1 flex flex-col">
             {/* Header */}
-            <header className="header header--is-windows flex items-center justify-between bg-[#151515] p-4 flex-shrink-0 m-">
-              <div className="header__section header__section--left flex items-center space-x-2">
-                <button className="header__back-button header__back-button--enabled octicon octicon-arrow-left" />
-                <h1 className="header__title header__title--has-back-button text-xl">
-                  Início
-                </h1>
-              </div>
-              <div className="header__search relative">
-                <input
-                  type="text"
-                  placeholder="Buscar jogos"
-                  className="header__search-input bg-gray-700 text-gray-300 placeholder-gray-500 px-3 py-1 rounded focus:outline-none"
+            <header className="header header--is-windows">
+              <section className="header__section header__section--left">
+                <button
+                  type="button"
+                  className="header__back-button header__back-button--enabled octicon octicon-arrow-left"
                 />
-                <button className="header__action-button absolute right-1 top-1/2 -translate-y-1/2 octicon octicon-search" />
-              </div>
+
+                <h3 className="header__title header__title--has-back-button">Início</h3>
+              </section>
+
+              <section className="header__section">
+                <div className="header__search">
+                  <button type="button" className="header__action-button">
+                    <span className="octicon octicon-search" />
+                  </button>
+
+                  <input
+                    type="text"
+                    name="search"
+                    placeholder="Buscar jogos"
+                    className="header__search-input"
+                  />
+
+                  <button type="button" className="header__action-button">
+                    <span className="octicon octicon-x" />
+                  </button>
+                </div>
+              </section>
             </header>
 
             {/* Área de conteúdo com scroll */}
