@@ -244,14 +244,14 @@ export const HydraMock = forwardRef<HTMLDivElement, HydraMockProps>(
                   placeholder="Buscar jogos"
                   className="header__search-input bg-gray-700 text-gray-300 placeholder-gray-500 px-3 py-1 rounded focus:outline-none"
                 />
-                <button className="header__action-button absolute right-1 top-1 octicon octicon-search" />
+                <button className="header__action-button absolute right-1 top-1/2 -translate-y-1/2 octicon octicon-search" />
               </div>
             </header>
 
             {/* Área de conteúdo com scroll */}
             <div className="container container__content flex-1 overflow-auto p-4 space-y-6 bg-[#1b1b1b] w-full">
-              {/* Seção de Destaques */}
-              <section className="settings__container">
+              <section className="home__content flex flex-col gap-6 w-full h-full">
+                {/* Seção de Destaques */}
                 <h2 className="text-lg mb-2">Destaques</h2>
                 {game && game.libraryHeroImageUrl ? (
                   <div
@@ -279,34 +279,49 @@ export const HydraMock = forwardRef<HTMLDivElement, HydraMockProps>(
                     </div>
                   </div>
                 )}
-              </section>
 
-              {/* Filtros por categoria */}
-              <section className="settings__appearance settings-appearance__actions flex space-x-2">
-                <button className="settings-appearance__button flex items-center space-x-1 px-4 py-2 bg-gray-700 rounded">
-                  <span className="octicon octicon-flame" />
-                  <span>Populares</span>
-                </button>
-                <button className="settings-appearance__button flex items-center space-x-1 px-4 py-2 bg-gray-700 rounded">
-                  <span className="octicon octicon-calendar" />
-                  <span>Mais baixados</span>
-                </button>
-                <button className="settings-appearance__button flex items-center space-x-1 px-4 py-2 bg-gray-700 rounded">
-                  <span className="octicon octicon-trophy" />
-                  <span>Pra platinizar</span>
-                </button>
-                <button className="settings-appearance__button flex items-center space-x-1 px-4 py-2 bg-gray-700 rounded">
-                  <span className="octicon octicon-light-bulb" />
-                  <span>Surpreenda-me</span>
-                </button>
-              </section>
+                {/* Filtros por categoria */}
+                <section className="settings__appearance settings-appearance__actions flex justify-between items-center home__header">
+                  <ul className="home__buttons-list flex space-x-2">
+                    <li>
+                      <button className="settings-appearance__button flex items-center space-x-1 px-4 py-2 bg-gray-700 rounded">
+                        <span className="octicon octicon-flame" />
+                        <span>Populares</span>
+                      </button>
+                    </li>
+                    <li>
+                      <button className="settings-appearance__button flex items-center space-x-1 px-4 py-2 bg-gray-700 rounded">
+                        <span className="octicon octicon-calendar" />
+                        <span>Mais baixados</span>
+                      </button>
+                    </li>
+                    <li>
+                      <button className="settings-appearance__button flex items-center space-x-1 px-4 py-2 bg-gray-700 rounded">
+                        <span className="octicon octicon-trophy" />
+                        <span>Pra platinizar</span>
+                      </button>
+                    </li>
+                  </ul>
+                  <button className="settings-appearance__button flex items-center space-x-1 px-4 py-2 bg-gray-700 rounded">
+                    <span className="octicon octicon-light-bulb" />
+                    <span>Surpreenda-me</span>
+                  </button>
+                </section>
 
-              {/* Grid de cards de jogos */}
-              <section className="settings-appearance__themes grid grid-cols-2 gap-4">
-                <div className="theme-card bg-gray-700 rounded h-36"></div>
-                <div className="theme-card bg-gray-700 rounded h-36"></div>
-                <div className="theme-card bg-gray-700 rounded h-36"></div>
-                <div className="theme-card bg-gray-700 rounded h-36"></div>
+                <h2 className="home__title flex items-center gap-2 mt-2">
+                  <div className="home__title-icon">
+                    <span className="octicon octicon-flame" />
+                  </div>
+                  Populares
+                </h2>
+
+                {/* Grid de cards de jogos */}
+                <section className="settings-appearance__themes grid grid-cols-2 gap-4 home__cards">
+                  <div className="theme-card bg-gray-700 rounded h-36 home__card-skeleton"></div>
+                  <div className="theme-card bg-gray-700 rounded h-36 home__card-skeleton"></div>
+                  <div className="theme-card bg-gray-700 rounded h-36 home__card-skeleton"></div>
+                  <div className="theme-card bg-gray-700 rounded h-36 home__card-skeleton"></div>
+                </section>
               </section>
             </div>
           </div>
