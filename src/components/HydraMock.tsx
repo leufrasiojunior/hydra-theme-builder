@@ -249,9 +249,9 @@ export const HydraMock = forwardRef<HTMLDivElement, HydraMockProps>(
             </header>
 
             {/* Área de conteúdo com scroll */}
-            <div className="container container__content flex-1 overflow-auto p-4 space-y-6 bg-[#1b1b1b] w-full">
+            <div className="home__content container container__content flex-1 overflow-auto p-4 space-y-6 bg-[#1b1b1b] w-full">
               {/* Seção de Destaques */}
-              <section className="settings__container">
+              <section>
                 <h2 className="text-lg mb-2">Destaques</h2>
                 {game && game.libraryHeroImageUrl ? (
                   <div
@@ -282,19 +282,27 @@ export const HydraMock = forwardRef<HTMLDivElement, HydraMockProps>(
               </section>
 
               {/* Filtros por categoria */}
-              <section className="settings__appearance settings-appearance__actions flex space-x-2">
-                <button className="settings-appearance__button flex items-center space-x-1 px-4 py-2 bg-gray-700 rounded">
-                  <span className="octicon octicon-flame" />
-                  <span>Populares</span>
-                </button>
-                <button className="settings-appearance__button flex items-center space-x-1 px-4 py-2 bg-gray-700 rounded">
-                  <span className="octicon octicon-calendar" />
-                  <span>Mais baixados</span>
-                </button>
-                <button className="settings-appearance__button flex items-center space-x-1 px-4 py-2 bg-gray-700 rounded">
-                  <span className="octicon octicon-trophy" />
-                  <span>Pra platinizar</span>
-                </button>
+              <section className="home__header">
+                <ul className="home__buttons-list">
+                  <li>
+                    <button className="settings-appearance__button flex items-center space-x-1 px-4 py-2 bg-gray-700 rounded">
+                      <span className="octicon octicon-flame" />
+                      <span>Populares</span>
+                    </button>
+                  </li>
+                  <li>
+                    <button className="settings-appearance__button flex items-center space-x-1 px-4 py-2 bg-gray-700 rounded">
+                      <span className="octicon octicon-calendar" />
+                      <span>Mais baixados</span>
+                    </button>
+                  </li>
+                  <li>
+                    <button className="settings-appearance__button flex items-center space-x-1 px-4 py-2 bg-gray-700 rounded">
+                      <span className="octicon octicon-trophy" />
+                      <span>Pra platinizar</span>
+                    </button>
+                  </li>
+                </ul>
                 <button className="settings-appearance__button flex items-center space-x-1 px-4 py-2 bg-gray-700 rounded">
                   <span className="octicon octicon-light-bulb" />
                   <span>Surpreenda-me</span>
@@ -302,11 +310,11 @@ export const HydraMock = forwardRef<HTMLDivElement, HydraMockProps>(
               </section>
 
               {/* Grid de cards de jogos */}
-              <section className="settings-appearance__themes grid grid-cols-2 gap-4">
-                <div className="theme-card bg-gray-700 rounded h-36"></div>
-                <div className="theme-card bg-gray-700 rounded h-36"></div>
-                <div className="theme-card bg-gray-700 rounded h-36"></div>
-                <div className="theme-card bg-gray-700 rounded h-36"></div>
+              <section className="home__cards grid grid-cols-2 gap-4">
+                <div className="home__card-skeleton bg-gray-700 rounded h-36"></div>
+                <div className="home__card-skeleton bg-gray-700 rounded h-36"></div>
+                <div className="home__card-skeleton bg-gray-700 rounded h-36"></div>
+                <div className="home__card-skeleton bg-gray-700 rounded h-36"></div>
               </section>
             </div>
           </div>
