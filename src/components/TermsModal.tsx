@@ -22,31 +22,53 @@ export function TermsModal({ onAccept }: TermsModalProps) {
             checked={responsibility}
             onChange={(e) => setResponsibility(e.target.checked)}
           />
-          <span>Isenção de responsabilidades (termo em construção)</span>
+          <span>
+            Li e concordo com a{' '}
+            <a className="underline" href="/terms/disclaimer" target="_blank" rel="noopener noreferrer">
+              Isenção de responsabilidade
+            </a>
+          </span>
         </label>
-        <label className="flex items-start space-x-2 text-gray-200">
-          <input
-            type="checkbox"
-            className="mt-1"
-            checked={useTerms}
-            onChange={(e) => setUseTerms(e.target.checked)}
-          />
-          <span>Termos de uso (em breve)</span>
-        </label>
-        <label className="flex items-start space-x-2 text-gray-200">
-          <input
-            type="checkbox"
-            className="mt-1"
-            checked={serviceTerms}
-            onChange={(e) => setServiceTerms(e.target.checked)}
-          />
-          <span>Termos de serviço (em breve)</span>
-        </label>
+
+        {responsibility && (
+          <label className="flex items-start space-x-2 text-gray-200 justify-end">
+            <input
+              type="checkbox"
+              className="mt-1"
+              checked={useTerms}
+              onChange={(e) => setUseTerms(e.target.checked)}
+            />
+            <span>
+              Li e aceito os{' '}
+              <a className="underline" href="/terms/termos-de-uso" target="_blank" rel="noopener noreferrer">
+                Termos de Uso
+              </a>
+            </span>
+          </label>
+        )}
+
+        {responsibility && useTerms && (
+          <label className="flex items-start space-x-2 text-gray-200 justify-end">
+            <input
+              type="checkbox"
+              className="mt-1"
+              checked={serviceTerms}
+              onChange={(e) => setServiceTerms(e.target.checked)}
+            />
+            <span>
+              Li e aceito os{' '}
+              <a className="underline" href="/terms/termos-de-servico" target="_blank" rel="noopener noreferrer">
+                Termos de Serviço
+              </a>
+            </span>
+          </label>
+        )}
+
         <button
           disabled={!allChecked}
           onClick={onAccept}
           className={`w-full py-2 rounded text-white ${
-            allChecked ? "bg-blue-600" : "bg-gray-600 cursor-not-allowed"
+            allChecked ? 'bg-blue-600' : 'bg-gray-600 cursor-not-allowed'
           }`}
         >
           Aceitar
