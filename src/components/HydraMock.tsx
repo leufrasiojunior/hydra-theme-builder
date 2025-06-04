@@ -1,4 +1,5 @@
 // src/components/HydraMock.tsx
+
 import {
   ArrowDownTrayIcon,
   Cog6ToothIcon,
@@ -26,21 +27,35 @@ export interface TrendingGame {
   uri: string;
 }
 
-// Componente GameOverlay integrado
+type LogoPosition =
+  | 'left'
+  | 'center'
+  | 'top-left'
+  | 'bottom-right'
+  | 'top-right'
+  | 'bottom-left'
+  | 'bottom-center';
+
+//
+// Componente “hero” que exibe a imagem de fundo (libraryHeroImageUrl),
+// o logo sobreposto e a descrição do jogo
+//
 const GameOverlay = ({
   backgroundUrl,
   logoUrl,
   title = 'Game',
   logoPosition = 'left',
   showDarkOverlay = false,
+  description = '',
 }: {
   backgroundUrl: string;
   logoUrl: string;
   title?: string;
-  logoPosition?: string;
+  logoPosition?: LogoPosition;
   showDarkOverlay?: boolean;
+  description?: string;
 }) => {
-  const logoPositionClasses = {
+  const logoPositionClasses: Record<LogoPosition, string> = {
     left: 'absolute top-6 left-6 h-64 w-64',
     center:
       'absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2',
@@ -53,23 +68,29 @@ const GameOverlay = ({
 
   return (
     <div
-      className={`
-                        hero__backdrop
-                        relative w-full h-full
-                        flex overflow-hidden
-                        bg-gradient-to-t from-black/80 to-transparent`}
+      className="
+        hero__backdrop
+        relative w-full h-full
+        flex overflow-hidden
+        bg-gradient-to-t from-black/80 to-transparent
+      "
     >
-      {/* Imagem de fundo */}
+      {/* Container da imagem de fundo */}
       <div className="relative w-full h-full">
         <Image
           src={backgroundUrl}
           alt={`${title} background`}
           fill
-          className="hero__media object-cover object-center absolute inset-0 transition-transform duration-200 ease-in-out group-hover:scale-[1.02]"
+          className="
+            hero__media
+            object-cover object-center
+            absolute inset-0
+            transition-transform duration-200 ease-in-out
+            group-hover:scale-[1.02]
+          "
           unoptimized
         />
 
-        {/* Overlay escuro opcional */}
         {showDarkOverlay && (
           <div className="absolute inset-0 bg-gradient-to-r from-black/60 via-black/20 to-transparent" />
         )}
@@ -77,9 +98,10 @@ const GameOverlay = ({
         {/* Logo sobreposto */}
         {logoUrl && (
           <div
-            className={`${
-              logoPositionClasses[logoPosition] || logoPositionClasses.left
-            } z-20 max-w-[50%]`}
+            className={`
+              ${logoPositionClasses[logoPosition] || logoPositionClasses.left}
+              z-20 max-w-[50%]
+            `}
           >
             <Image
               src={logoUrl}
@@ -92,11 +114,12 @@ const GameOverlay = ({
           </div>
         )}
 
-        {/* Descrição do jogo no canto inferior esquerdo */}
-        <div className="absolute bottom-6 left-6 max-w-[60%] text-white">
+        {/* Descrição no canto inferior esquerdo */}
+        <div className="absolute bottom-6 left-6 max-w-[60%] text-white z-20">
           <p className="text-sm leading-relaxed drop-shadow-md">
-            Explore Cyrodiil like never before with stunning new visuals and
-            refined gameplay in The Elder Scrolls IV: Oblivion™ Remastered.
+            {description && description !== 'Game'
+              ? description
+              : 'DESCRIPTION-OF-THE-GAME'}
           </p>
         </div>
       </div>
@@ -104,27 +127,24 @@ const GameOverlay = ({
   );
 };
 
-/**
- * Prefixa cada seletor do bloco CSS com "#hydra-mock ".
- * Ex.: ".sidebar {…}" → "#hydra-mock .sidebar {…}"
- */
+//
+// Função que “prefixa” o CSS customizado com #hydra-mock
+// para que as regras não vazem para o resto da página.
+//
 function scopeCss(css: string): string {
   return css.replace(
     /([^{}]+)\{([^}]*)\}/g,
-    (_match: string, selectors: string, body: string): string => {
+    (_match: string, selectors: string, body: string) => {
       const scoped = selectors
         .split(',')
         .map((raw: string) => {
           const sel = raw.trim();
-          // Se o usuário escreveu body/html/#root, escopa para o container
           if (sel === 'body' || sel === 'html' || sel === '#root') {
             return '#hydra-mock';
           }
-          // Se já está prefixado, mantém
           if (sel.startsWith('#hydra-mock')) {
             return sel;
           }
-          // Caso normal, prefixa
           return `#hydra-mock ${sel}`;
         })
         .join(', ');
@@ -138,17 +158,15 @@ export const HydraMock = forwardRef<HTMLDivElement, HydraMockProps>(
     const [game, setGame] = useState<TrendingGame | null>(null);
 
     useEffect(() => {
-      // Busca o array completo e pega o primeiro elemento
       fetch('https://hydra-api-us-east-1.losbroxas.org/games/featured')
         .then((res) => res.json())
         .then((data: TrendingGame[]) => {
           if (Array.isArray(data) && data.length) {
             setGame(data[0]);
-            console.log(data[0]);
           }
         })
         .catch(() => {
-          /* silencioso em caso de erro */
+          // ignora erros silenciosamente
         });
     }, []);
 
@@ -156,10 +174,13 @@ export const HydraMock = forwardRef<HTMLDivElement, HydraMockProps>(
       <div
         ref={ref}
         id="hydra-mock"
-        className="hydra-mock flex flex-col h-full w-full bg-gray-900 text-gray-200 font-sans
-                 rounded-lg overflow-hidden border border-gray-700"
+        className="
+          hydra-mock flex flex-col h-full w-full
+          bg-gray-900 text-gray-200 font-sans
+          rounded-lg overflow-hidden border border-gray-700
+        "
       >
-        {/* Injeta o CSS do tema escopado */}
+        {/* Injeta o CSS customizado, “escopado” para #hydra-mock */}
         <style>{scopeCss(customCss)}</style>
 
         {/* 1) Title Bar */}
@@ -167,7 +188,7 @@ export const HydraMock = forwardRef<HTMLDivElement, HydraMockProps>(
           <span className="text-lg font-semibold">Hydra</span>
         </div>
 
-        {/* 2) Conteúdo principal: sidebar + main */}
+        {/* 2) Área principal: sidebar + main */}
         <div className="flex flex-1 overflow-hidden">
           {/* Sidebar */}
           <aside className="sidebar sidebar__container w-64 bg-[#151515] p-4 flex flex-col overflow-y-auto border-r border-[#ffffff26]">
@@ -185,6 +206,7 @@ export const HydraMock = forwardRef<HTMLDivElement, HydraMockProps>(
                 </div>
               </button>
             </div>
+
             {/* Menu de navegação */}
             <nav className="sidebar__content flex-1">
               <ul className="sidebar__menu space-y-1">
@@ -231,7 +253,7 @@ export const HydraMock = forwardRef<HTMLDivElement, HydraMockProps>(
           {/* Main Content */}
           <div className="flex-1 flex flex-col">
             {/* Header */}
-            <header className="header header--is-windows flex items-center justify-between bg-[#151515] p-4 flex-shrink-0 m-">
+            <header className="header header--is-windows flex items-center justify-between bg-[#151515] p-4 flex-shrink-0">
               <div className="header__section header__section--left flex items-center space-x-2">
                 <button className="header__back-button header__back-button--enabled octicon octicon-arrow-left" />
                 <h1 className="header__title header__title--has-back-button text-xl">
@@ -248,31 +270,45 @@ export const HydraMock = forwardRef<HTMLDivElement, HydraMockProps>(
               </div>
             </header>
 
-            {/* Área de conteúdo com scroll */}
+            {/* Conteúdo com scroll */}
             <div className="container container__content flex-1 overflow-auto p-4 space-y-6 bg-[#1b1b1b] w-full">
-              <section className="home__content flex flex-col gap-6 w-full h-full">
+              <section className="home__content flex flex-col gap-6 w-full">
                 {/* Seção de Destaques */}
                 <h2 className="text-lg mb-2">Destaques</h2>
+
                 {game && game.libraryHeroImageUrl ? (
                   <div
                     className="
-                                        group relative w-full h-[280px] min-h-[280px] max-h-[280px]
-                                        rounded-md overflow-hidden
-                                        border border-[#ffffff26]
-                                        shadow-[0_0_15px_0_#000]
-                                        cursor-pointer
-                                        z-10"
+                      group relative w-full h-[280px] min-h-[280px] max-h-[280px]
+                      rounded-md overflow-hidden
+                      border border-[#ffffff26]
+                      shadow-[0_0_15px_0_#000]
+                      cursor-pointer
+                      z-10
+                    "
                   >
                     <GameOverlay
                       backgroundUrl={game.libraryHeroImageUrl}
                       logoUrl={game.logoImageUrl}
                       title={game.title}
-                      logoPosition={game.logoPosition || 'left'}
+                      logoPosition={
+                        [
+                          'left',
+                          'center',
+                          'top-left',
+                          'bottom-right',
+                          'top-right',
+                          'bottom-left',
+                          'bottom-center',
+                        ].includes(game.logoPosition)
+                          ? (game.logoPosition as LogoPosition)
+                          : 'left'
+                      }
                       showDarkOverlay={true}
+                      description={game.description}
                     />
                   </div>
                 ) : (
-                  // Fallback/Loading state
                   <div className="rounded overflow-hidden">
                     <div className="w-full h-40 bg-gray-600 animate-pulse flex items-center justify-center">
                       <span className="text-gray-400">Carregando...</span>
@@ -285,7 +321,12 @@ export const HydraMock = forwardRef<HTMLDivElement, HydraMockProps>(
                   <ul className="home__buttons-list flex space-x-2">
                     <li>
                       <button className="settings-appearance__button flex items-center space-x-1 px-4 py-2 bg-gray-700 rounded">
-                        <span className="octicon octicon-flame" />
+                        {/* Aqui trocamos pelo GIF de chama */}
+                        <img
+                          src="/icos/flame-animated.gif"
+                          alt="Flame Icon"
+                          className="h-6 w-6"
+                        />
                         <span>Populares</span>
                       </button>
                     </li>
@@ -298,20 +339,29 @@ export const HydraMock = forwardRef<HTMLDivElement, HydraMockProps>(
                     <li>
                       <button className="settings-appearance__button flex items-center space-x-1 px-4 py-2 bg-gray-700 rounded">
                         <span className="octicon octicon-trophy" />
-                        <span>Pra platinizar</span>
+                        <span>Pra Platinar</span>
                       </button>
                     </li>
                   </ul>
-                  <button className="settings-appearance__button flex items-center space-x-1 px-4 py-2 bg-gray-700 rounded">
-                    <span className="octicon octicon-light-bulb" />
+                  <button className="button button--outline flex items-center space-x-2 px-4 py-2 bg-gray-700 rounded hover:bg-gray-600">
+                    <div className="home__icon-wrapper">
+                      <img
+                        src="/icos/stars-animated.gif"
+                        alt="Stars animation"
+                        className="home__stars-icon h-5 w-5 object-contain"
+                      />
+                    </div>
                     <span>Surpreenda-me</span>
                   </button>
                 </section>
 
+                {/* Título “Populares” com o ícone de chama */}
                 <h2 className="home__title flex items-center gap-2 mt-2">
-                  <div className="home__title-icon">
-                    <span className="octicon octicon-flame" />
-                  </div>
+                  <img
+                    src="/icos/flame-animated.gif"
+                    alt="Flame Icon"
+                    className="h-6 w-6"
+                  />
                   Populares
                 </h2>
 

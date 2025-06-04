@@ -1,264 +1,299 @@
 /* 1. Barra de título (Title Bar) */
 .title-bar {
-  --placeholder: "";
+  --placeholder: '';
 }
 
 /* 2. Sidebar (Barra lateral) */
 .sidebar {
-  --placeholder: "";
+  --placeholder: '';
 }
 .sidebar__container {
-  --placeholder: "";
+  --placeholder: '';
 }
 .sidebar__content {
-  --placeholder: "";
+  --placeholder: '';
 }
 .sidebar__section {
-  --placeholder: "";
+  --placeholder: '';
 }
 .sidebar__menu {
-  --placeholder: "";
+  --placeholder: '';
 }
 .sidebar__menu-item {
-  --placeholder: "";
+  --placeholder: '';
 }
 .sidebar__menu-item-button {
-  --placeholder: "";
+  --placeholder: '';
 }
 .sidebar__menu-item--active {
-  --placeholder: "";
+  --placeholder: '';
 }
 .sidebar__handle {
-  --placeholder: "";
+  --placeholder: '';
 }
 
 /* 3. Perfil do usuário na sidebar */
 .sidebar-profile {
-  --placeholder: "";
+  --placeholder: '';
 }
 .sidebar-profile__button {
-  --placeholder: "";
+  --placeholder: '';
 }
 .sidebar-profile__button-content {
-  --placeholder: "";
+  --placeholder: '';
 }
 .profile-avatar {
-  --placeholder: "";
+  --placeholder: '';
 }
 .sidebar-profile__button-information {
-  --placeholder: "";
+  --placeholder: '';
 }
 .sidebar-profile__button-title {
-  --placeholder: "";
+  --placeholder: '';
 }
 .sidebar-profile__button-game-running-title {
-  --placeholder: "";
+  --placeholder: '';
 }
 .sidebar-profile__game-running-icon {
-  --placeholder: "";
+  --placeholder: '';
 }
 .sidebar-profile__friends-button {
-  --placeholder: "";
+  --placeholder: '';
 }
 
 /* 4. Campo de busca na sidebar */
 .text-field-container {
-  --placeholder: "";
+  --placeholder: '';
 }
 .text-field-container__text-field-wrapper {
-  --placeholder: "";
+  --placeholder: '';
 }
 .text-field-container__text-field {
-  --placeholder: "";
+  --placeholder: '';
 }
 .text-field-container__text-field--dark {
-  --placeholder: "";
+  --placeholder: '';
 }
 .text-field-container__text-field-input {
-  --placeholder: "";
+  --placeholder: '';
 }
 
 /* 5. Container principal e header */
 .container {
-  --placeholder: "";
+  --placeholder: '';
 }
 .header {
-  --placeholder: "";
+  --placeholder: '';
 }
 .header--is-windows {
-  --placeholder: "";
+  --placeholder: '';
 }
 .header__section {
-  --placeholder: "";
+  --placeholder: '';
 }
 .header__section--left {
-  --placeholder: "";
+  --placeholder: '';
 }
 .header__back-button {
-  --placeholder: "";
+  --placeholder: '';
 }
 .header__back-button--enabled {
-  --placeholder: "";
+  --placeholder: '';
 }
 .header__title {
-  --placeholder: "";
+  --placeholder: '';
 }
 .header__title--has-back-button {
-  --placeholder: "";
+  --placeholder: '';
 }
 .header__search {
-  --placeholder: "";
+  --placeholder: '';
 }
 .header__action-button {
-  --placeholder: "";
+  --placeholder: '';
 }
 .header__search-input {
-  --placeholder: "";
+  --placeholder: '';
 }
 
 /* 6. Banner de destaque e filtros */
 .container__content {
-  --placeholder: "";
+  --placeholder: '';
 }
 .settings__container {
-  --placeholder: "";
+  --placeholder: '';
 }
 .settings__categories {
-  --placeholder: "";
+  --placeholder: '';
 }
 .settings__appearance {
-  --placeholder: "";
+  --placeholder: '';
 }
 .settings-appearance__actions {
-  --placeholder: "";
+  --placeholder: '';
 }
 .settings-appearance__actions-left {
-  --placeholder: "";
+  --placeholder: '';
 }
 .settings-appearance__actions-right {
-  --placeholder: "";
+  --placeholder: '';
 }
 .settings-appearance__button {
-  --placeholder: "";
+  --placeholder: '';
 }
 .settings-appearance__themes {
-  --placeholder: "";
+  --placeholder: '';
 }
 
 /* 7. Cards de tema */
 .theme-card {
-  --placeholder: "";
+  --placeholder: '';
 }
 .theme-card__header {
-  --placeholder: "";
+  --placeholder: '';
 }
 .theme-card__header__title {
-  --placeholder: "";
+  --placeholder: '';
 }
 .theme-card__author {
-  --placeholder: "";
+  --placeholder: '';
 }
 .theme-card__author__name {
-  --placeholder: "";
+  --placeholder: '';
 }
 .theme-card__actions {
-  --placeholder: "";
+  --placeholder: '';
 }
 .theme-card__actions__left {
-  --placeholder: "";
+  --placeholder: '';
 }
 .theme-card__actions__right {
-  --placeholder: "";
+  --placeholder: '';
 }
 
 /* 8. Botões genéricos */
 .button {
-  --placeholder: "";
+  --placeholder: '';
 }
 .button--outline {
-  --placeholder: "";
+  --placeholder: '';
 }
 .button--primary {
-  --placeholder: "";
+  --placeholder: '';
 }
 .button--danger {
-  --placeholder: "";
+  --placeholder: '';
 }
 
 /* 9. Bottom Panel / Rodapé */
 .bottom-panel {
-  --placeholder: "";
+  --placeholder: '';
 }
 .bottom-panel__downloads-button {
-  --placeholder: "";
+  --placeholder: '';
 }
 .bottom-panel__version-button {
-  --placeholder: "";
+  --placeholder: '';
 }
 
 /* 10. Popups e widgets */
 .fb-changelog-popup-wrapper {
-  --placeholder: "";
+  --placeholder: '';
 }
 .fb-changelog-popup-iframe {
-  --placeholder: "";
+  --placeholder: '';
 }
 .fb-changelog-popup-overlay {
-  --placeholder: "";
+  --placeholder: '';
 }
 .featurebase-widget-overlay {
-  --placeholder: "";
+  --placeholder: '';
 }
 .featurebase-widget-iframe {
-  --placeholder: "";
+  --placeholder: '';
 }
 .featurebase-widget-iframe-right {
-  --placeholder: "";
+  --placeholder: '';
 }
 .fb-widget-fullscreen-x {
-  --placeholder: "";
+  --placeholder: '';
 }
 .fb-button-x-fade-in {
-  --placeholder: "";
+  --placeholder: '';
 }
 
 /* 11. Ícones (Octicons) */
 .octicon {
-  --placeholder: "";
+  --placeholder: '';
 }
 .octicon-person {
-  --placeholder: "";
+  --placeholder: '';
 }
 .octicon-people {
-  --placeholder: "";
+  --placeholder: '';
 }
 .octicon-home {
-  --placeholder: "";
+  --placeholder: '';
 }
 .octicon-apps {
-  --placeholder: "";
+  --placeholder: '';
 }
 .octicon-download {
-  --placeholder: "";
+  --placeholder: '';
 }
 .octicon-gear {
-  --placeholder: "";
+  --placeholder: '';
 }
 .octicon-arrow-left {
-  --placeholder: "";
+  --placeholder: '';
 }
 .octicon-search {
-  --placeholder: "";
+  --placeholder: '';
 }
 .octicon-globe {
-  --placeholder: "";
+  --placeholder: '';
 }
 .octicon-trash {
-  --placeholder: "";
+  --placeholder: '';
 }
 .octicon-plus {
-  --placeholder: "";
+  --placeholder: '';
 }
 .octicon-pencil {
-  --placeholder: "";
+  --placeholder: '';
+}
+
+/* Classe que já existia para o ícone de chama */
+.home__flame-icon {
+  --placeholder: '';
+}
+
+/* Classe que já existia para o ícone de estrelas */
+.home__stars-icon {
+  --placeholder: '';
+}
+
+/* Também existe um container para o título (linha “Populares”) */
+.home__title-icon img {
+  --placeholder: '';
+}
+
+.button {
+  /* Classes do Electron - editáveis pelo CSS dinâmico */
+}
+
+.button--outline {
+  /* Classes do Electron - editáveis pelo CSS dinâmico */
+}
+
+.home__icon-wrapper {
+  /* Classes do Electron - editáveis pelo CSS dinâmico */
+}
+
+.home__stars-icon {
+  /* Classes do Electron - editáveis pelo CSS dinâmico */
+}
+
+.home__flame-icon {
+  /* Classes do Electron - editáveis pelo CSS dinâmico */
 }
