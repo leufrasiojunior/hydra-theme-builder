@@ -322,9 +322,11 @@ export const HydraMock = forwardRef<HTMLDivElement, HydraMockProps>(
                     <li>
                       <button className="settings-appearance__button flex items-center space-x-1 px-4 py-2 bg-gray-700 rounded">
                         {/* Aqui trocamos pelo GIF de chama */}
-                        <img
+                        <Image
                           src="/icos/flame-animated.gif"
                           alt="Flame Icon"
+                          width={24}
+                          height={24}
                           className="h-6 w-6"
                         />
                         <span>Populares</span>
@@ -345,9 +347,11 @@ export const HydraMock = forwardRef<HTMLDivElement, HydraMockProps>(
                   </ul>
                   <button className="button button--outline flex items-center space-x-2 px-4 py-2 bg-gray-700 rounded hover:bg-gray-600">
                     <div className="home__icon-wrapper">
-                      <img
+                      <Image
                         src="/icos/stars-animated.gif"
                         alt="Stars animation"
+                        width={20}
+                        height={20}
                         className="home__stars-icon h-5 w-5 object-contain"
                       />
                     </div>
@@ -357,9 +361,11 @@ export const HydraMock = forwardRef<HTMLDivElement, HydraMockProps>(
 
                 {/* Título “Populares” com o ícone de chama */}
                 <h2 className="home__title flex items-center gap-2 mt-2">
-                  <img
+                  <Image
                     src="/icos/flame-animated.gif"
                     alt="Flame Icon"
+                    width={24}
+                    height={24}
                     className="h-6 w-6"
                   />
                   Populares
@@ -382,9 +388,9 @@ export const HydraMock = forwardRef<HTMLDivElement, HydraMockProps>(
           <div className="bottom-panel__downloads-button text-sm text-gray-400">
             Sem downloads em andamento
           </div>
-          <div className="bottom-panel__version-button text-sm text-gray-400">
-            Ej3ppdvg – v3.5.2 "Lumen"
-          </div>
+            <div className="bottom-panel__version-button text-sm text-gray-400">
+              Ej3ppdvg – v3.5.2 &quot;Lumen&quot;
+            </div>
         </div>
       </div>
     );

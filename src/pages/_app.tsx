@@ -3,11 +3,12 @@ import "@/styles/globals.css";
 import "@/styles/HydraMock.css";
 import type { AppProps } from "next/app";
 import { SessionProvider } from "next-auth/react";
+import type { Session } from "next-auth";
 import { Navbar } from "@/components/Navbar";
 
-export default function App({ Component, pageProps }: AppProps) {
+export default function App({ Component, pageProps }: AppProps<{ session: Session | null }>) {
   return (
-    <SessionProvider session={(pageProps as any).session}>
+    <SessionProvider session={pageProps.session}>
       {/* 1) Navbar sempre visível */}
       <Navbar />
 
