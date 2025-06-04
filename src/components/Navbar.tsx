@@ -1,5 +1,5 @@
 // src/components/Navbar.tsx
-import React from 'react';
+import React, { useState } from 'react';
 import {
   Disclosure,
   DisclosureButton,
@@ -9,11 +9,11 @@ import {
 import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline';
 import { signOut, useSession } from 'next-auth/react';
 import Image from 'next/image';
+import { IssueModal } from '@/components/IssueModal';
 
 const navigation = [
   { name: 'Dashboard', href: '#', current: true },
   { name: 'Team', href: '#', current: false },
-  { name: 'Projects', href: '#', current: false },
 ];
 
 const legalLinks = [
@@ -28,11 +28,13 @@ function classNames(...classes: string[]) {
 
 export function Navbar() {
   const { status } = useSession();
+  const [issueOpen, setIssueOpen] = useState(false);
 
   return (
-    <Disclosure as="nav" className="fixed top-0 inset-x-0 z-50 bg-gray-800">
-      {({ open }) => (
-        <>
+    <>
+      <Disclosure as="nav" className="fixed top-0 inset-x-0 z-50 bg-gray-800">
+        {({ open }) => (
+          <>
           <div className="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
             <div className="relative flex h-16 items-center justify-between">
               {/* Mobile menu button */}
@@ -75,6 +77,12 @@ export function Navbar() {
                         {item.name}
                       </a>
                     ))}
+                    <button
+                      onClick={() => setIssueOpen(true)}
+                      className="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium"
+                    >
+                      Problemas?
+                    </button>
                     <Menu as="div" className="relative">
                       <Menu.Button className="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium">
                         Termos
@@ -134,6 +142,13 @@ export function Navbar() {
                   {item.name}
                 </DisclosureButton>
               ))}
+              <DisclosureButton
+                as="button"
+                className="text-gray-300 hover:bg-gray-700 hover:text-white block rounded-md px-3 py-2 text-base font-medium"
+                onClick={() => setIssueOpen(true)}
+              >
+                Problemas?
+              </DisclosureButton>
               {legalLinks.map((item) => (
                 <DisclosureButton
                   key={item.name}
@@ -149,5 +164,7 @@ export function Navbar() {
         </>
       )}
     </Disclosure>
+    <IssueModal open={issueOpen} onOpenChange={setIssueOpen} />
+    </>
   );
 }
