@@ -25,15 +25,15 @@ export const authOptions: NextAuthOptions = {
       }
       // profile.login vem do GitHub e é o username
       if (profile && typeof profile === "object" && "login" in profile) {
-        token.githubLogin = (profile as any).login;
+        token.githubLogin = (profile as { login?: string }).login;
       }
       return token;
     },
     // 3) Expomos githubToken e githubLogin na session
     async session({ session, token }) {
-      (session as any).githubToken = (token as any).githubToken;
-      // @ts-ignore
-      session.user.login = (token as any).githubLogin;
+      session.githubToken = token.githubToken;
+      // @ts-expect-error: user.login is augmented in next-auth types
+      session.user.login = token.githubLogin;
       return session;
     },
   },

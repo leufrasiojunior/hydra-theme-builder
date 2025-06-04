@@ -26,7 +26,6 @@ export default async function handler(
   }
 
   const githubToken = tokenPayload.githubToken as string;
-  const forkOwner = tokenPayload.githubLogin as string;
   const upstreamOwner = process.env.GITHUB_UPSTREAM_OWNER!;
   const repoName = process.env.GITHUB_UPSTREAM_REPO!;
 
@@ -40,8 +39,11 @@ export default async function handler(
     });
 
     return res.status(200).json({ forkUrl: fork.html_url });
-  } catch (e: any) {
+  } catch (e: unknown) {
     console.error("Erro criando fork:", e);
-    return res.status(500).json({ error: e.message || "Erro interno" });
+    if (e instanceof Error) {
+      return res.status(500).json({ error: e.message });
+    }
+    return res.status(500).json({ error: "Erro interno" });
   }
 }

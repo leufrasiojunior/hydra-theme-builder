@@ -1,4 +1,10 @@
 import { useState } from 'react';
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+} from '@/components/ui/dialog';
 
 interface TermsModalProps {
   onAccept: () => void;
@@ -12,11 +18,13 @@ export function TermsModal({ onAccept }: TermsModalProps) {
   const allChecked = responsibility && useTerms && serviceTerms;
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-80">
-      <div className="bg-gray-800 p-6 rounded space-y-4 max-w-md w-full flex flex-col items-baseline">
-        <h2 className="text-lg font-semibold text-white">
-          Confirmação de Termos
-        </h2>
+    <Dialog open onOpenChange={() => {}}>
+      <DialogContent className="space-y-4 flex flex-col items-baseline shadow-md p-10 border border-gray-700">
+        <DialogHeader>
+          <DialogTitle className="text-white">
+            Confirmação de Termos
+          </DialogTitle>
+        </DialogHeader>
         <label className="flex items-start space-x-2 text-gray-200">
           <input
             type="checkbox"
@@ -90,7 +98,7 @@ export function TermsModal({ onAccept }: TermsModalProps) {
         >
           Aceitar
         </button>
-      </div>
-    </div>
+      </DialogContent>
+    </Dialog>
   );
 }

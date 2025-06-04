@@ -97,8 +97,10 @@ export function ThemeEditor() {
             if (!res.ok) throw new Error(json.error || "Erro ao criar PR");
 
             window.open(json.prUrl, "_blank");
-        } catch (err: any) {
-            alert(err.message);
+        } catch (err: unknown) {
+            if (err instanceof Error) {
+                alert(err.message);
+            }
         } finally {
             setLoading(false);
         }
@@ -191,7 +193,7 @@ export function ThemeEditor() {
                         >
                             Fechar
                         </button>
-                        <HydraMock customCss={customCss} ref={null as any} />
+                        <HydraMock customCss={customCss} ref={null} />
                     </div>
                 </div>
             )}
