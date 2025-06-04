@@ -19,9 +19,11 @@ export function TermsModal({ onAccept }: TermsModalProps) {
 
   return (
     <Dialog open onOpenChange={() => {}}>
-      <DialogContent className="space-y-4 flex flex-col items-baseline">
+      <DialogContent className="space-y-4 flex flex-col items-baseline shadow-md p-10 border border-gray-700">
         <DialogHeader>
-          <DialogTitle className="text-white">Confirmação de Termos</DialogTitle>
+          <DialogTitle className="text-white">
+            Confirmação de Termos
+          </DialogTitle>
         </DialogHeader>
         <label className="flex items-start space-x-2 text-gray-200">
           <input
