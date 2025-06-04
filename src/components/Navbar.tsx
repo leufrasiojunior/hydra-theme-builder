@@ -1,6 +1,6 @@
 // src/components/Navbar.tsx
 import React from "react";
-import { Disclosure, DisclosureButton, DisclosurePanel } from "@headlessui/react";
+import { Disclosure, DisclosureButton, DisclosurePanel, Menu } from "@headlessui/react";
 import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
 import { signOut, useSession } from "next-auth/react";
 import Image from "next/image";
@@ -9,7 +9,12 @@ const navigation = [
     { name: "Dashboard", href: "#", current: true },
     { name: "Team", href: "#", current: false },
     { name: "Projects", href: "#", current: false },
-    { name: "Calendar", href: "#", current: false },
+];
+
+const legalLinks = [
+    { name: "Termos de Serviço", href: "/terms/termos-de-servico" },
+    { name: "Isenção de responsabilidade", href: "/terms/disclaimer" },
+    { name: "Termos de Uso", href: "/terms/termos-de-uso" },
 ];
 
 function classNames(...classes: string[]) {
@@ -48,7 +53,7 @@ export function Navbar() {
                                         className="h-8 w-auto"
                                     />
                                 </div>
-                                <div className="hidden sm:ml-6 sm:block">
+                                <div className="hidden sm:ml-6 sm:flex sm:items-center">
                                     <div className="flex space-x-4">
                                         {navigation.map((item) => (
                                             <a
@@ -65,6 +70,28 @@ export function Navbar() {
                                                 {item.name}
                                             </a>
                                         ))}
+                                        <Menu as="div" className="relative">
+                                            <Menu.Button className="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium">
+                                                Termos
+                                            </Menu.Button>
+                                            <Menu.Items className="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg focus:outline-none">
+                                                {legalLinks.map((item) => (
+                                                    <Menu.Item key={item.name}>
+                                                        {({ active }) => (
+                                                            <a
+                                                                href={item.href}
+                                                                className={classNames(
+                                                                    active ? 'bg-gray-100' : '',
+                                                                    'block px-4 py-2 text-sm text-gray-700'
+                                                                )}
+                                                            >
+                                                                {item.name}
+                                                            </a>
+                                                        )}
+                                                    </Menu.Item>
+                                                ))}
+                                            </Menu.Items>
+                                        </Menu>
                                     </div>
                                 </div>
                             </div>
@@ -98,6 +125,16 @@ export function Navbar() {
                                         "block rounded-md px-3 py-2 text-base font-medium"
                                     )}
                                     aria-current={item.current ? "page" : undefined}
+                                >
+                                    {item.name}
+                                </DisclosureButton>
+                            ))}
+                            {legalLinks.map((item) => (
+                                <DisclosureButton
+                                    key={item.name}
+                                    as="a"
+                                    href={item.href}
+                                    className="text-gray-300 hover:bg-gray-700 hover:text-white block rounded-md px-3 py-2 text-base font-medium"
                                 >
                                     {item.name}
                                 </DisclosureButton>
