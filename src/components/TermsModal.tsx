@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState } from 'react';
 
 interface TermsModalProps {
   onAccept: () => void;
@@ -13,8 +13,10 @@ export function TermsModal({ onAccept }: TermsModalProps) {
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-80">
-      <div className="bg-gray-800 p-6 rounded space-y-4 max-w-md w-full">
-        <h2 className="text-lg font-semibold text-white">Confirmação de Termos</h2>
+      <div className="bg-gray-800 p-6 rounded space-y-4 max-w-md w-full flex flex-col items-baseline">
+        <h2 className="text-lg font-semibold text-white">
+          Confirmação de Termos
+        </h2>
         <label className="flex items-start space-x-2 text-gray-200">
           <input
             type="checkbox"
@@ -24,7 +26,12 @@ export function TermsModal({ onAccept }: TermsModalProps) {
           />
           <span>
             Li e concordo com a{' '}
-            <a className="underline" href="/terms/disclaimer" target="_blank" rel="noopener noreferrer">
+            <a
+              className="underline"
+              href="/terms/disclaimer"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
               Isenção de responsabilidade
             </a>
           </span>
@@ -40,7 +47,12 @@ export function TermsModal({ onAccept }: TermsModalProps) {
             />
             <span>
               Li e aceito os{' '}
-              <a className="underline" href="/terms/termos-de-uso" target="_blank" rel="noopener noreferrer">
+              <a
+                className="underline"
+                href="/terms/termos-de-uso"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
                 Termos de Uso
               </a>
             </span>
@@ -57,7 +69,12 @@ export function TermsModal({ onAccept }: TermsModalProps) {
             />
             <span>
               Li e aceito os{' '}
-              <a className="underline" href="/terms/termos-de-servico" target="_blank" rel="noopener noreferrer">
+              <a
+                className="underline"
+                href="/terms/termos-de-servico"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
                 Termos de Serviço
               </a>
             </span>
