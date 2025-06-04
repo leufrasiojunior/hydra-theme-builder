@@ -3,6 +3,7 @@ import React from "react";
 import { Disclosure, DisclosureButton, DisclosurePanel } from "@headlessui/react";
 import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
 import { signOut, useSession } from "next-auth/react";
+import Image from "next/image";
 
 const navigation = [
     { name: "Dashboard", href: "#", current: true },
@@ -16,7 +17,7 @@ function classNames(...classes: string[]) {
 }
 
 export function Navbar() {
-    const { data: session, status } = useSession();
+    const { status } = useSession();
 
     return (
         <Disclosure as="nav" className="fixed top-0 inset-x-0 z-50 bg-gray-800">
@@ -39,9 +40,11 @@ export function Navbar() {
                             {/* Logo and navigation */}
                             <div className="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start">
                                 <div className="flex shrink-0 items-center">
-                                    <img
+                                    <Image
                                         src="https://dummyimage.com/32x32/000/000000"
                                         alt="Logo placeholder"
+                                        width={32}
+                                        height={32}
                                         className="h-8 w-auto"
                                     />
                                 </div>

@@ -105,8 +105,11 @@ export default async function handler(
     });
 
     return res.status(200).json({ prUrl: pr.html_url });
-  } catch (e: any) {
+  } catch (e: unknown) {
     console.error("Erro criando PR:", e);
-    return res.status(500).json({ error: e.message || "Erro interno" });
+    if (e instanceof Error) {
+      return res.status(500).json({ error: e.message });
+    }
+    return res.status(500).json({ error: "Erro interno" });
   }
 }
