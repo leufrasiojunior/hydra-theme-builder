@@ -158,7 +158,7 @@ export const HydraMock = forwardRef<HTMLDivElement, HydraMockProps>(
     const [game, setGame] = useState<TrendingGame | null>(null);
 
     useEffect(() => {
-      fetch('https://hydra-api-us-east-1.losbroxas.org/games/featured')
+      fetch('/api/hydra/featured')
         .then((res) => res.json())
         .then((data: TrendingGame[]) => {
           if (Array.isArray(data) && data.length) {
