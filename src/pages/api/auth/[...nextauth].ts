@@ -32,7 +32,6 @@ export const authOptions: NextAuthOptions = {
     // 3) Expomos githubToken e githubLogin na session
     async session({ session, token }) {
       session.githubToken = token.githubToken;
-      // @ts-expect-error: user.login is augmented in next-auth types
       session.user.login = token.githubLogin;
       return session;
     },
