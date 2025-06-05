@@ -1,5 +1,6 @@
 // src/types/next-auth.d.ts
 import "next-auth";
+import "next-auth/jwt";
 
 declare module "next-auth" {
   interface Session {
@@ -15,6 +16,13 @@ declare module "next-auth" {
   }
   interface JWT {
     // campos que inserimos no jwt callback
+    githubToken?: string;
+    githubLogin?: string;
+  }
+}
+
+declare module "next-auth/jwt" {
+  interface JWT {
     githubToken?: string;
     githubLogin?: string;
   }
