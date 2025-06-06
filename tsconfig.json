@@ -21,7 +21,8 @@
     "next-env.d.ts",
     "**/*.ts",
     "**/*.tsx",
-    "src/types/next-auth.d.ts"
+    "src/types/next-auth.d.ts",
+    "src/types/gtag.d.ts"
   ],
   "exclude": ["node_modules"]
 }
