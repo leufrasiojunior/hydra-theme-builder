@@ -6,7 +6,7 @@ export default async function handler(
 ) {
   try {
     const response = await fetch(
-      'hydra-api-us-east-1.losbroxas.org/games/featured'
+      'https://hydra-api-us-east-1.losbroxas.org/games/featured'
     );
     if (!response.ok) {
       return res
