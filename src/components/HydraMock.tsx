@@ -156,6 +156,7 @@ function scopeCss(css: string): string {
 export const HydraMock = forwardRef<HTMLDivElement, HydraMockProps>(
   ({ customCss }, ref) => {
     const [game, setGame] = useState<TrendingGame | null>(null);
+    const [hotGames, setHotGames] = useState<TrendingGame[]>([]);
 
     useEffect(() => {
       fetch('/api/hydra/featured')
@@ -163,6 +164,17 @@ export const HydraMock = forwardRef<HTMLDivElement, HydraMockProps>(
         .then((data: TrendingGame[]) => {
           if (Array.isArray(data) && data.length) {
             setGame(data[0]);
+          }
+        })
+        .catch(() => {
+          // ignora erros silenciosamente
+        });
+
+      fetch('/api/hydra/hot')
+        .then((res) => res.json())
+        .then((data: TrendingGame[]) => {
+          if (Array.isArray(data)) {
+            setHotGames(data);
           }
         })
         .catch(() => {
@@ -373,10 +385,31 @@ export const HydraMock = forwardRef<HTMLDivElement, HydraMockProps>(
 
                 {/* Grid de cards de jogos */}
                 <section className="settings-appearance__themes grid grid-cols-2 gap-4 home__cards">
-                  <div className="theme-card bg-gray-700 rounded h-36 home__card-skeleton"></div>
-                  <div className="theme-card bg-gray-700 rounded h-36 home__card-skeleton"></div>
-                  <div className="theme-card bg-gray-700 rounded h-36 home__card-skeleton"></div>
-                  <div className="theme-card bg-gray-700 rounded h-36 home__card-skeleton"></div>
+                  {hotGames.length > 0 ? (
+                    hotGames.map((g) => (
+                      <div
+                        key={g.objectId}
+                        className="theme-card bg-gray-700 rounded h-36 relative overflow-hidden flex items-end"
+                      >
+                        <Image
+                          src={g.libraryImageUrl}
+                          alt={g.title}
+                          fill
+                          className="object-cover"
+                          unoptimized
+                        />
+                        <div className="absolute inset-0 bg-black/40" />
+                        <span className="relative p-2 text-sm">{g.title}</span>
+                      </div>
+                    ))
+                  ) : (
+                    Array.from({ length: 4 }).map((_, i) => (
+                      <div
+                        key={i}
+                        className="theme-card bg-gray-700 rounded h-36 home__card-skeleton"
+                      />
+                    ))
+                  )}
                 </section>
               </section>
             </div>
