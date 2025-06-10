@@ -40,6 +40,15 @@ export default function Upload() {
         if (data?.data?.display_url) {
           setUrl(data.data.display_url);
           setError('');
+          try {
+            const stored = JSON.parse(
+              localStorage.getItem('uploadedImageUrls') || '[]'
+            );
+            stored.push(data.data.display_url);
+            localStorage.setItem('uploadedImageUrls', JSON.stringify(stored));
+          } catch {
+            // ignore localStorage errors
+          }
         } else {
           setError('Falha ao enviar a imagem.');
           setUrl('');
