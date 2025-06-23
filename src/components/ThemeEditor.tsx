@@ -3,6 +3,7 @@ import React, { useState, useRef } from 'react';
 import Editor from '@monaco-editor/react';
 import html2canvas from 'html2canvas';
 import { HydraMock } from './HydraMock';
+import { UploadedImages } from './UploadedImages';
 import type { OnMount } from '@monaco-editor/react';
 import classDescriptions from '@/data/classDescriptions';
 
@@ -179,6 +180,7 @@ export function ThemeEditor() {
             {loading ? 'Enviando PR…' : 'Create PR'}
           </button>
         </div>
+        <UploadedImages />
       </div>
 
       {/* Preview Mock */}

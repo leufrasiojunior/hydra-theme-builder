@@ -40,6 +40,21 @@ export default function Upload() {
         if (data?.data?.display_url) {
           setUrl(data.data.display_url);
           setError('');
+          try {
+            const stored = JSON.parse(
+              localStorage.getItem('uploadedImages') || '[]'
+            );
+            stored.push({
+              id: data.data.id,
+              url: data.data.display_url,
+              thumbUrl: data.data.thumb.url,
+              size: data.data.size,
+              extension: data.data.image.extension,
+            });
+            localStorage.setItem('uploadedImages', JSON.stringify(stored));
+          } catch {
+            /* ignore */
+          }
         } else {
           setError('Falha ao enviar a imagem.');
           setUrl('');
