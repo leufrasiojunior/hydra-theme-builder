@@ -54,8 +54,8 @@ export function Navbar() {
                 <div className="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start">
                   <div className="flex shrink-0 items-center">
                     <Image
-                      src=""
-                      alt="Logo placeholder"
+                      src="/icos/flame-static.png"
+                      alt="Hydra logo"
                       width={32}
                       height={32}
                       className="h-8 w-auto"
