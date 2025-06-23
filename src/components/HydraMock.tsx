@@ -8,9 +8,11 @@ import {
 } from '@heroicons/react/24/outline';
 import React, { forwardRef, useEffect, useState } from 'react';
 import Image from 'next/image';
+import classDescriptions from '@/data/classDescriptions';
 
 export interface HydraMockProps {
   customCss: string;
+  onElementSelect?: (selector: string) => void;
 }
 
 export interface TrendingGame {
@@ -154,8 +156,55 @@ function scopeCss(css: string): string {
 }
 
 export const HydraMock = forwardRef<HTMLDivElement, HydraMockProps>(
-  ({ customCss }, ref) => {
+  ({ customCss, onElementSelect }, ref) => {
     const [game, setGame] = useState<TrendingGame | null>(null);
+    const [hotGames, setHotGames] = useState<TrendingGame[]>([]);
+    const classSet = React.useMemo(
+      () => new Set(Object.keys(classDescriptions)),
+      []
+    );
+    const hoverRef = React.useRef<HTMLElement | null>(null);
+
+    const handleMouseOver = (e: React.MouseEvent<HTMLDivElement>) => {
+      let el = e.target as HTMLElement | null;
+      while (el && el !== e.currentTarget) {
+        const match = Array.from(el.classList).find((c) => classSet.has(c));
+        if (match) {
+          if (hoverRef.current && hoverRef.current !== el) {
+            hoverRef.current.classList.remove('hydra-hover');
+          }
+          el.classList.add('hydra-hover');
+          hoverRef.current = el;
+          return;
+        }
+        el = el.parentElement;
+      }
+      if (hoverRef.current) {
+        hoverRef.current.classList.remove('hydra-hover');
+        hoverRef.current = null;
+      }
+    };
+
+    const handleMouseLeave = () => {
+      if (hoverRef.current) {
+        hoverRef.current.classList.remove('hydra-hover');
+        hoverRef.current = null;
+      }
+    };
+
+    const handleClick = (e: React.MouseEvent<HTMLDivElement>) => {
+      if (!onElementSelect) return;
+      let el = e.target as HTMLElement | null;
+      while (el && el !== e.currentTarget) {
+        const match = Array.from(el.classList).find((c) => classSet.has(c));
+        if (match) {
+          onElementSelect(`.${match}`);
+          e.stopPropagation();
+          break;
+        }
+        el = el.parentElement;
+      }
+    };
 
     useEffect(() => {
       fetch('/api/hydra/featured')
@@ -163,6 +212,17 @@ export const HydraMock = forwardRef<HTMLDivElement, HydraMockProps>(
         .then((data: TrendingGame[]) => {
           if (Array.isArray(data) && data.length) {
             setGame(data[0]);
+          }
+        })
+        .catch(() => {
+          // ignora erros silenciosamente
+        });
+
+      fetch('/api/hydra/hot')
+        .then((res) => res.json())
+        .then((data: TrendingGame[]) => {
+          if (Array.isArray(data)) {
+            setHotGames(data);
           }
         })
         .catch(() => {
@@ -179,9 +239,15 @@ export const HydraMock = forwardRef<HTMLDivElement, HydraMockProps>(
           bg-gray-900 text-gray-200 font-sans
           rounded-lg overflow-hidden border border-gray-700
         "
+        onMouseOver={handleMouseOver}
+        onMouseLeave={handleMouseLeave}
+        onClick={handleClick}
       >
-        {/* Injeta o CSS customizado, “escopado” para #hydra-mock */}
-        <style>{scopeCss(customCss)}</style>
+        {/* Injeta o CSS customizado e estilos de highlight */}
+        <style>{`
+          ${scopeCss(customCss)}
+          #hydra-mock .hydra-hover { outline: 2px dashed #3b82f6; cursor: pointer; }
+        `}</style>
 
         {/* 1) Title Bar */}
         <div className="title-bar flex items-center h-10 bg-[#151515] px-4 border-b-2 border-[#ffffff26]">
@@ -373,10 +439,31 @@ export const HydraMock = forwardRef<HTMLDivElement, HydraMockProps>(
 
                 {/* Grid de cards de jogos */}
                 <section className="settings-appearance__themes grid grid-cols-2 gap-4 home__cards">
-                  <div className="theme-card bg-gray-700 rounded h-36 home__card-skeleton"></div>
-                  <div className="theme-card bg-gray-700 rounded h-36 home__card-skeleton"></div>
-                  <div className="theme-card bg-gray-700 rounded h-36 home__card-skeleton"></div>
-                  <div className="theme-card bg-gray-700 rounded h-36 home__card-skeleton"></div>
+                  {hotGames.length > 0
+                    ? hotGames.map((g) => (
+                        <div
+                          key={g.objectId}
+                          className="theme-card bg-gray-700 rounded h-36 relative overflow-hidden flex items-end"
+                        >
+                          <Image
+                            src={g.libraryImageUrl}
+                            alt={g.title}
+                            fill
+                            className="object-cover"
+                            unoptimized
+                          />
+                          <div className="absolute inset-0 bg-black/40" />
+                          <span className="relative p-2 text-sm">
+                            {g.title}
+                          </span>
+                        </div>
+                      ))
+                    : Array.from({ length: 4 }).map((_, i) => (
+                        <div
+                          key={i}
+                          className="theme-card bg-gray-700 rounded h-36 home__card-skeleton"
+                        />
+                      ))}
                 </section>
               </section>
             </div>
@@ -388,9 +475,9 @@ export const HydraMock = forwardRef<HTMLDivElement, HydraMockProps>(
           <div className="bottom-panel__downloads-button text-sm text-gray-400">
             Sem downloads em andamento
           </div>
-            <div className="bottom-panel__version-button text-sm text-gray-400">
-              Ej3ppdvg – v3.5.2 &quot;Lumen&quot;
-            </div>
+          <div className="bottom-panel__version-button text-sm text-gray-400">
+            Ej3ppdvg – v3.5.2 &quot;Lumen&quot;
+          </div>
         </div>
       </div>
     );
